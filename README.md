@@ -1,4 +1,17 @@
-# Getting Started with Create React App
+# GameSphere
+
+## DESCRIPTION
+
+Welcome to GameSphere, your ultimate destination for organizing and curating your gaming collection. Whether you're looking to store your favorite games or create a personalized wish list, GameSphere offers a seamless and intuitive platform to cater to your gaming needs. Dive into a world where every game finds its perfect place, ensuring that your gaming journey is as organized and enjoyable as possible.
+
+## KEY FEATURES
+
+GameSphere offers many capable CRUD Operations such as: creating, reading, updating, and deleting instances of our java class, Game.
+
+Data relationships between java classes are a major part of GameSphere. It allows Many-to-Many and other relationships to be made between a game, genre, and creator class.
+
+# HOW TO USE (Visual Studio Code)
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
