@@ -27,14 +27,41 @@ export default function Game() {
         console.log("New Game added")
     })
  }
-    useEffect(()=>{
-        fetch("http://localhost:8080/game/getAll")
-        .then(res=>res.json())
-        .then((result)=>{
-            setGame(result);
-        }
-        )
-    },[])
+ const fetchGames = () => {
+  fetch("http://localhost:8080/game/getAll")
+  .then(res => res.json())
+  .then(result => {
+      setGame(result);
+  });
+}
+
+useEffect(() => {
+  fetchGames();
+}, []);
+
+const handleClickDelete = (id) => {
+  fetch(`http://localhost:8080/game/delete/${id}`, {
+      method: "DELETE"
+  }).then(() => {
+      console.log("Game deleted");
+      // Refresh the list of games after deletion
+      fetchGames();
+  });
+}
+const handleClickUpdate = (id) => {
+  const updatedName = prompt("Enter the updated name:");
+  if (updatedName) {
+      fetch(`http://localhost:8080/game/change/${id}`, {
+          method: "PUT",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({ name: updatedName })
+      }).then(() => {
+          console.log("Game Updated");
+          fetchGames();
+      });
+  }
+}
+    
   return (
     <Container>
         <Paper elevation={3} style={paperStyle}>
@@ -63,11 +90,13 @@ export default function Game() {
    
         {game.map(game=> (
             <Paper elevation={6} style={{margin:"10px", padding:"15px", textAlign:"left",}} key={game.id}>
-                Id:{game.id}
-                
-                Game:{game.name}
-        
 
+                {game.id}
+                -
+                {game.name}
+        
+                <Button variant="contained" style={{margin:"15px", textAlign:"left"}} onClick={() => handleClickDelete(game.id)}>Delete</Button>
+                <Button variant="contained" onClick={() => handleClickUpdate(game.id)}>Update</Button>
             </Paper>
   ))}
     </Paper>
